@@ -119,20 +119,42 @@ namespace Barbosa_101337690_Assignment2
                             Console.WriteLine();
                             ct[limit] = new Contacts(firstName, lastName, email, phoneNumber, birthDay, birthMonth, birthYear);
                             limit++;
+                            Console.WriteLine("Contact added to the list");
+                            Console.WriteLine();
+                            Console.WriteLine("Press enter to return to menu");
+                            Console.ReadKey();
                         }
                         else
                         {
-                            Console.WriteLine("Contact list is full");
+                            Console.WriteLine("ALERT: Contact list is full");
+                            Console.WriteLine();
+                            Console.WriteLine("Press enter to return to menu");
+                            Console.ReadKey();
                         }
                         break;
                     case 2:
-
-
+                        if (limit == 0)
+                        {
+                            Console.WriteLine("ALERT: The contact list is empty");
+                            Console.WriteLine();
+                            Console.WriteLine("Press enter to return to menu");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.WriteLine("The full contact list is:");
+                            for (int i = 0; i < limit; i++)
+                            {
+                                Console.WriteLine($"\nContact {i}) {ct[i].GetFullName()}");
+                            }
+                            Console.WriteLine("Press enter to return to menu");
+                            Console.ReadKey();
+                        }
+                        break;
                     default:
                         break;
                 }
             }
-
 
 
 
