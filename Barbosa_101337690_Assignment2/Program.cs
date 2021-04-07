@@ -62,7 +62,37 @@ namespace Barbosa_101337690_Assignment2
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello Wod!");
+            //declarations
+            string firstName;
+            string lastName;
+            string email;
+            string phoneNumber;
+            int birthDay;
+            int birthMonth;
+            int birthYear;
+            int contactsSize = 100;
+            int limit = 0;
+            Contacts[] ct = new Contacts[contactsSize];
+            int userChoice;
+            string val;
+
+            //while (userChoice != 5)
+            //{
+                Console.WriteLine("Assigment2 - Contact Manager:");
+                Console.WriteLine();
+                Console.WriteLine("Select one of the options:");
+                Console.WriteLine();
+                Console.WriteLine("1) Add Contact");
+                Console.WriteLine("2) View Contact List");
+                Console.WriteLine("3) View a Contact");
+                Console.WriteLine("4) Delete Contact");
+                Console.WriteLine("5) Exit");
+                Console.WriteLine();
+
+            //}
+
+            // Contacts allContacts = new Contacts(firstName, lastName, email, phoneNumber, birthDay, birthMonth, birthYear);
+
         }
     }
 }
