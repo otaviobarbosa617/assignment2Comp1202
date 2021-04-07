@@ -73,11 +73,12 @@ namespace Barbosa_101337690_Assignment2
             int contactsSize = 100;
             int limit = 0;
             Contacts[] ct = new Contacts[contactsSize];
-            int userChoice;
+            int userChoice = 0;
             string val;
 
-            //while (userChoice != 5)
-            //{
+            //menu loop
+            while (userChoice != 5)
+            {
                 Console.WriteLine("Assigment2 - Contact Manager:");
                 Console.WriteLine();
                 Console.WriteLine("Select one of the options:");
@@ -88,8 +89,52 @@ namespace Barbosa_101337690_Assignment2
                 Console.WriteLine("4) Delete Contact");
                 Console.WriteLine("5) Exit");
                 Console.WriteLine();
+                Console.Write("Your choice from 1 to 5: ");
+                userChoice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
 
-            //}
+                //menu selections
+
+                switch (userChoice)
+                {
+                    case 1:
+                        if (limit < contactsSize)
+                        {
+                            Console.WriteLine("Enter all information for New Contact ");
+                            Console.WriteLine();
+                            Console.Write("First Name: ");
+                            firstName = Console.ReadLine();
+                            Console.Write("Last Name: ");
+                            lastName = Console.ReadLine();
+                            Console.Write("E-mail address: ");
+                            email = Console.ReadLine();
+                            Console.Write("Phone Number: ");
+                            phoneNumber = Console.ReadLine();
+                            Console.Write("Day of Birth: ");
+                            birthDay = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Month of Birth: ");
+                            birthMonth = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Year of Birth: ");
+                            birthYear = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine();
+                            ct[limit] = new Contacts(firstName, lastName, email, phoneNumber, birthDay, birthMonth, birthYear);
+                            limit++;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Contact list is full");
+                        }
+                        break;
+                    case 2:
+
+
+                    default:
+                        break;
+                }
+            }
+
+
+
 
             // Contacts allContacts = new Contacts(firstName, lastName, email, phoneNumber, birthDay, birthMonth, birthYear);
 
