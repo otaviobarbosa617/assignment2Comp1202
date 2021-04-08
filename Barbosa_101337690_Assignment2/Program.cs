@@ -16,10 +16,10 @@ namespace Barbosa_101337690_Assignment2
         //Object
         public Contacts(string firstName, string lastName, string phone, string email, int dayOfBirth, int monthOfBirth, int yearOfBirth)
         {
-            this.firstName = firstName ?? throw new ArgumentNullException(nameof(firstName));
-            this.lastName = lastName ?? throw new ArgumentNullException(nameof(lastName));
-            this.phone = phone ?? throw new ArgumentNullException(nameof(phone));
-            this.email = email ?? throw new ArgumentNullException(nameof(email));
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.phone = phone;
+            this.email = email;
             this.dayOfBirth = dayOfBirth;
             this.monthOfBirth = monthOfBirth;
             this.yearOfBirth = yearOfBirth;
@@ -100,10 +100,12 @@ namespace Barbosa_101337690_Assignment2
                             do
                             {
                                 addContact();
-                                addNew = Console.ReadLine();
+                                Console.WriteLine("Do you wish to continue?\n");
+                                Console.WriteLine("Y or Yes to continue, any other key to stop\n");
+                                addNew = Console.ReadLine().ToLowerInvariant();
                                 Console.WriteLine();
 
-                            } while (addNew == "yes" || addNew == "Y" || addNew == "y");
+                            } while (addNew == "yes" || addNew == "y");
                         }
                         else
                         {
@@ -139,36 +141,69 @@ namespace Barbosa_101337690_Assignment2
 
             void addContact()
             {
-                Console.WriteLine("Enter all information for New Contact \n");
-                Console.Write("First Name: ");
-                firstName = Console.ReadLine();
-                Console.Write("Last Name: ");
-                lastName = Console.ReadLine();
-                Console.Write("E-mail address: ");
-                email = Console.ReadLine();
-                Console.Write("Phone Number: ");
-                phoneNumber = Console.ReadLine();
-                Console.Write("Day of Birth: ");
-                birthDay = int.Parse(Console.ReadLine());
-                Console.Write("Month of Birth: ");
-                birthMonth = int.Parse(Console.ReadLine());
-                Console.Write("Year of Birth: ");
-                birthYear = int.Parse(Console.ReadLine());
-                Console.WriteLine();
-                contact[counter] = new Contacts(firstName, lastName, email, phoneNumber, birthDay, birthMonth, birthYear);
-                counter++;
-                Console.WriteLine("Contact added to the list! \n");
-                Console.WriteLine("Do you wish to continue?\n");
-                Console.WriteLine("Y or Yes to continue, any other key to stop\n");
+                try
+                {
+                    Console.WriteLine("Enter all information for New Contact \n");
+                    Console.Write("First Name: ");
+                    firstName = Console.ReadLine().Trim();
+                    if (String.IsNullOrEmpty(firstName)) {
+                        throw new ArgumentException("First name cannot be blank");
+                    }
+
+                    Console.Write("Last Name: ");
+                    lastName = Console.ReadLine().Trim();
+                    if (String.IsNullOrEmpty(lastName))
+                    {
+                        throw new ArgumentException("Last name cannot be blank");
+                    }
+
+                    Console.Write("E-mail address: ");
+                    email = Console.ReadLine().Trim();
+                    if (String.IsNullOrEmpty(email))
+                    {
+                        throw new ArgumentException("Email cannot be blank");
+                    }
+
+                    Console.Write("Phone Number: ");
+                    phoneNumber = Console.ReadLine().Trim();
+                    if (String.IsNullOrEmpty(phoneNumber))
+                    {
+                        throw new ArgumentException("Phone number cannot be blank");
+                    }
+
+                    Console.Write("Day of Birth: ");
+                    birthDay = Convert.ToInt32(Console.ReadLine().Trim());
+
+                    Console.Write("Month of Birth: ");
+                    birthMonth = Convert.ToInt32(Console.ReadLine().Trim());
+
+                    Console.Write("Year of Birth: ");
+                    birthYear = Convert.ToInt32(Console.ReadLine().Trim());
+
+                    Console.WriteLine();
+
+                    contact[counter] = new Contacts(firstName, lastName, email, phoneNumber, birthDay, birthMonth, birthYear);
+                    counter++;
+
+                    Console.WriteLine("Contact added to the list! \n");
+                    
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"\nUSER ERROR: {ex.Message}\n");
+                }
             }
 
             void displayContactList()
             {
                 Console.WriteLine("The full contact list is:");
+
                 for (int i = 0; i < counter; i++)
                 {
                     Console.WriteLine($"\nContact #{i + 1} - {contact[i].GetFullName()}");
                 }
+
                 Console.WriteLine();
                 Console.WriteLine("Press enter to return to menu");
                 Console.ReadKey();
@@ -181,6 +216,7 @@ namespace Barbosa_101337690_Assignment2
                 firstName = Console.ReadLine();
                 Console.Write("Last Name: ");
                 lastName = Console.ReadLine();
+
                 for (int i = 0; i < counter; i++)
                 {
                     // You got to love Microsoft documentation:
@@ -210,6 +246,7 @@ namespace Barbosa_101337690_Assignment2
                 firstName = Console.ReadLine();
                 Console.Write("Last Name: ");
                 lastName = Console.ReadLine();
+
                 for (int i = 0; i < counter; i++)
                 {
                     if (contact[i].GetFirstName().Equals(firstName, StringComparison.OrdinalIgnoreCase) && (contact[i].GetLasttName().Equals(lastName, StringComparison.OrdinalIgnoreCase)))
@@ -220,10 +257,11 @@ namespace Barbosa_101337690_Assignment2
                         userConfirmation = Console.ReadLine().ToLower();
                         if (userConfirmation == "yes" || userConfirmation == "y")
                         {
-                            if (i + 1 <= counter)
+                            if ((i + 1) <= counter)
                             {
                                 contact[i] = contact[i + 1]; //concept borrowed from JS assigment 3
                                 counter--;
+                                //something is making it loop again
                             }
                             else
                             {
