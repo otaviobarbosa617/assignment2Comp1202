@@ -31,9 +31,9 @@ namespace Barbosa_101337690_Assignment2
             return firstName;
         }
 
-        public string GetLasttName()
+        public string GetLastName()
         {
-            return firstName;
+            return lastName;
         }
 
         public string GetFullName()
@@ -53,7 +53,7 @@ namespace Barbosa_101337690_Assignment2
 
         public string ToInfo()
         {
-            return $"Name: {GetFullName()}\nPhone Number: {GetPhone()}\nEmail: {email}\nDate of Birth: {GetDateOfBirth()}\n";
+            return $"Name: {GetFullName()}\nPhone Number: {GetPhone()}\nEmail: {email}\nDate of Birth: {GetDateOfBirth()}";
         }
     }
 
@@ -63,21 +63,22 @@ namespace Barbosa_101337690_Assignment2
         public static void Main(string[] args)
         {
             //declarations
-            string firstName;
-            string lastName;
-            string email;
-            string phoneNumber;
-            int birthDay;
-            int birthMonth;
-            int birthYear;
+            string uFirstName;
+            string uLastName;
+            string uEmail;
+            string uPhoneNumber;
+            int uBirthDay;
+            int uBirthMonth;
+            int uBirthYear;
             int contactsSize = 100;
             int counter = 0;
             Contacts[] contact = new Contacts[contactsSize];
             int userChoice = 0;
 
             //menu loop
-            while (userChoice != 5)
+            do
             {
+                Console.Clear();
                 Console.WriteLine("Assigment2 - Contact Manager:\n");
                 Console.WriteLine("Select one of the options:\n");
                 Console.WriteLine("1) Add Contact");
@@ -117,6 +118,7 @@ namespace Barbosa_101337690_Assignment2
                     case 2:
                         if (counter == 0)
                         {
+                            Console.Clear();
                             Console.WriteLine("ALERT: The contact list is empty \n");
                             Console.WriteLine("Press enter to return to menu \n");
                             Console.ReadKey();
@@ -132,61 +134,72 @@ namespace Barbosa_101337690_Assignment2
                     case 4:
                         deleteContact();
                         break;
+                    case 5:
+                        Console.Clear();
+                        Console.WriteLine("Thank you for using this COMP1202 Assignment Program");
+                        Console.WriteLine("\nMade by Otavio Barbosa");
+                        Console.WriteLine("\nStudent ID: 101337690");
+                        Console.ReadKey();
+                        break;
                     default:
+                        Console.Clear();
                         Console.WriteLine();
                         Console.WriteLine("Invalid selection! Try again! \n");
                         break;
                 }
-            }
+            } while (userChoice != 5);
 
             void addContact()
             {
                 try
                 {
-                    Console.WriteLine("Enter all information for New Contact \n");
-                    Console.Write("First Name: ");
-                    firstName = Console.ReadLine().Trim();
-                    if (String.IsNullOrEmpty(firstName)) {
+                    Console.Clear();
+                    Console.WriteLine("Enter all information for New Contact ");
+                    Console.Write("\nFirst Name: ");
+                    uFirstName = Console.ReadLine().ToString();
+                    if (String.IsNullOrEmpty(uFirstName))
+                    {
                         throw new ArgumentException("First name cannot be blank");
                     }
 
-                    Console.Write("Last Name: ");
-                    lastName = Console.ReadLine().Trim();
-                    if (String.IsNullOrEmpty(lastName))
+                    Console.Write("\nLast Name: ");
+                    uLastName = Console.ReadLine().ToString();
+                    if (String.IsNullOrEmpty(uLastName))
                     {
                         throw new ArgumentException("Last name cannot be blank");
                     }
 
-                    Console.Write("E-mail address: ");
-                    email = Console.ReadLine().Trim();
-                    if (String.IsNullOrEmpty(email))
+                    Console.Write("\nE-mail address: ");
+                    uEmail = Console.ReadLine().ToString();
+                    if (String.IsNullOrEmpty(uEmail))
                     {
                         throw new ArgumentException("Email cannot be blank");
                     }
 
-                    Console.Write("Phone Number: ");
-                    phoneNumber = Console.ReadLine().Trim();
-                    if (String.IsNullOrEmpty(phoneNumber))
+                    Console.Write("\nPhone Number: ");
+                    uPhoneNumber = Console.ReadLine().Trim();
+                    if (String.IsNullOrEmpty(uPhoneNumber))
                     {
                         throw new ArgumentException("Phone number cannot be blank");
                     }
 
-                    Console.Write("Day of Birth: ");
-                    birthDay = Convert.ToInt32(Console.ReadLine().Trim());
+                    Console.Write("\nDay of Birth: ");
+                    uBirthDay = Convert.ToInt32(Console.ReadLine().Trim());
 
-                    Console.Write("Month of Birth: ");
-                    birthMonth = Convert.ToInt32(Console.ReadLine().Trim());
+                    Console.Write("\nMonth of Birth: ");
+                    uBirthMonth = Convert.ToInt32(Console.ReadLine().Trim());
 
-                    Console.Write("Year of Birth: ");
-                    birthYear = Convert.ToInt32(Console.ReadLine().Trim());
+                    Console.Write("\nYear of Birth: ");
+                    uBirthYear = Convert.ToInt32(Console.ReadLine().Trim());
 
                     Console.WriteLine();
 
-                    contact[counter] = new Contacts(firstName, lastName, email, phoneNumber, birthDay, birthMonth, birthYear);
+                    contact[counter] = new Contacts(uFirstName, uLastName, uEmail, uPhoneNumber, uBirthDay, uBirthMonth, uBirthYear);
                     counter++;
 
+                    Console.Clear();
                     Console.WriteLine("Contact added to the list! \n");
-                    
+
 
                 }
                 catch (Exception ex)
@@ -197,6 +210,7 @@ namespace Barbosa_101337690_Assignment2
 
             void displayContactList()
             {
+                Console.Clear();
                 Console.WriteLine("The full contact list is:");
 
                 for (int i = 0; i < counter; i++)
@@ -211,78 +225,75 @@ namespace Barbosa_101337690_Assignment2
 
             void findContact()
             {
-                Console.WriteLine("Contact finder - Enter the information: \n");
-                Console.Write("First Name: ");
-                firstName = Console.ReadLine();
-                Console.Write("Last Name: ");
-                lastName = Console.ReadLine();
+                Console.Clear();
+                bool found = false;
+                Console.WriteLine("Contact finder - Enter the information:");
+                Console.Write("\nFirst Name: ");
+                uFirstName = Console.ReadLine().ToString();
+                Console.Write("\nLast Name: ");
+                uLastName = Console.ReadLine().ToString();
 
                 for (int i = 0; i < counter; i++)
                 {
                     // You got to love Microsoft documentation:
-                    if (contact[i].GetFirstName().Equals(firstName, StringComparison.OrdinalIgnoreCase) && (contact[i].GetLasttName().Equals(lastName, StringComparison.OrdinalIgnoreCase)))
+                    if (contact[i].GetFirstName().Equals(uFirstName, StringComparison.OrdinalIgnoreCase) && (contact[i].GetLastName().Equals(uLastName, StringComparison.OrdinalIgnoreCase)))
                     {
-                        Console.WriteLine("\nContact found: \n");
+                        Console.Clear();
+                        Console.WriteLine("Contact found: \n");
                         Console.WriteLine($"{contact[i].ToInfo()} \n");
+                        found = true;
                         Console.WriteLine("Press enter to return to menu");
                         Console.ReadKey();
+                        break;
                     }
                     else
                     {
-                        Console.WriteLine("\nContact NOT found: \n");
-                        Console.WriteLine("Press enter to return to menu");
-                        Console.ReadKey();
-                    }
+                        found = false;
+                    }  
                 }
-
+                if (!found)
+                {
+                    Console.WriteLine("\nContact NOT found! \n");
+                }
             }
 
             void deleteContact()
             {
-                string userConfirmation;
+                Console.Clear();
                 Console.WriteLine("Delete Contact - Enter the information: ");
                 Console.WriteLine();
-                Console.Write("First Name: ");
-                firstName = Console.ReadLine();
-                Console.Write("Last Name: ");
-                lastName = Console.ReadLine();
+                Console.Write("\nFirst Name: ");
+                uFirstName = Console.ReadLine().ToString();
+                Console.Write("\nLast Name: ");
+                uLastName = Console.ReadLine().ToString();
+                bool found = false;
 
                 for (int i = 0; i < counter; i++)
                 {
-                    if (contact[i].GetFirstName().Equals(firstName, StringComparison.OrdinalIgnoreCase) && (contact[i].GetLasttName().Equals(lastName, StringComparison.OrdinalIgnoreCase)))
+                    if (contact[i].GetFirstName().Equals(uFirstName, StringComparison.OrdinalIgnoreCase) && (contact[i].GetLastName().Equals(uLastName, StringComparison.OrdinalIgnoreCase)))
                     {
-                        Console.WriteLine("\nContact found! \n");
-                        Console.WriteLine("Are you sure that you want to delete it?");
-                        Console.WriteLine("Type yes or y to confirm, any other key to cancel?");
-                        userConfirmation = Console.ReadLine().ToLower();
-                        if (userConfirmation == "yes" || userConfirmation == "y")
+                        if (i + 1 <= counter)
                         {
-                            if ((i + 1) <= counter)
-                            {
-                                contact[i] = contact[i + 1]; //concept borrowed from JS assigment 3
-                                counter--;
-                                //something is making it loop again
-                            }
-                            else
-                            {
-                                counter--;
-                                Console.WriteLine("\nContact deleted\n");
-                            }
+                            contact[i] = contact[i + 1]; //concept borrowed from COMP1231 assignment 3
+                            counter--;
                         }
                         else
                         {
-                            Console.WriteLine("\nYou have chosen to cancel\n");
+                            counter--;
                         }
-
+                        found = true;
+                        Console.WriteLine("\nContact deleted\n");
+                        break;
                     }
                     else
                     {
-                        Console.WriteLine("\nContact NOT found: \n");
-                        Console.WriteLine("Press enter to return to menu");
-                        Console.ReadKey();
+                        found = false;
                     }
                 }
-
+                if (!found)
+                {
+                    Console.WriteLine("\nContact NOT found!\n");
+                }
 
             }
 
